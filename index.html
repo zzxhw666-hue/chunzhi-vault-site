@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>春枝资料库</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main id="app">
+      <section class="gate" id="gateView">
+        <div class="brand">
+          <p>CHUNZHI VAULT</p>
+          <h1>春枝资料库</h1>
+        </div>
+        <form class="gate-card" id="gateForm">
+          <h2>输入访问口令</h2>
+          <p>输入正确口令后，可以查看和管理云端资料。</p>
+          <label>
+            访问口令
+            <input id="passcodeInput" type="password" autocomplete="current-password" placeholder="请输入口令" required />
+          </label>
+          <button class="primary-button" type="submit">进入资料库</button>
+          <p class="message" id="gateMessage" hidden></p>
+        </form>
+      </section>
+
+      <section class="vault" id="vaultView" hidden>
+        <header class="topbar">
+          <div class="brand compact">
+            <p>CHUNZHI VAULT</p>
+            <h1>春枝资料库</h1>
+          </div>
+          <div class="topbar-actions">
+            <span class="status-pill" id="statusText">连接中</span>
+            <button class="secondary-button" id="lockButton" type="button">锁定</button>
+          </div>
+        </header>
+
+        <section class="toolbar">
+          <label>
+            搜索
+            <input id="searchInput" type="search" placeholder="搜索标题、分类、内容或标签" />
+          </label>
+          <label>
+            分类
+            <select id="categoryFilter">
+              <option value="">全部分类</option>
+            </select>
+          </label>
+          <button class="primary-button" id="newItemButton" type="button">新增资料</button>
+        </section>
+
+        <section class="content-layout">
+          <div class="item-list" id="itemList"></div>
+          <aside class="detail-panel" id="detailPanel">
+            <div class="empty-state">
+              <h2>选择一条资料</h2>
+              <p>点击左侧卡片查看详情，也可以新增你的第一条资料。</p>
+            </div>
+          </aside>
+        </section>
+      </section>
+    </main>
+
+    <dialog id="itemDialog" class="item-dialog">
+      <form id="itemForm" method="dialog">
+        <div class="dialog-head">
+          <h2 id="dialogTitle">新增资料</h2>
+          <button id="closeDialogButton" class="icon-button" type="button" aria-label="关闭">×</button>
+        </div>
+        <input id="itemIdInput" type="hidden" />
+        <label>
+          标题
+          <input id="titleInput" type="text" maxlength="120" required />
+        </label>
+        <label>
+          分类
+          <input id="categoryInput" type="text" maxlength="40" placeholder="例如：客户、选题、资料" required />
+        </label>
+        <label>
+          标签
+          <input id="tagsInput" type="text" maxlength="160" placeholder="用逗号分隔，例如：小红书, 保险, 灵感" />
+        </label>
+        <label>
+          来源链接
+          <input id="sourceUrlInput" type="url" placeholder="https://example.com" />
+        </label>
+        <label>
+          内容
+          <textarea id="contentInput" rows="9" maxlength="8000" required></textarea>
+        </label>
+        <div class="button-row">
+          <button class="primary-button" type="submit">保存</button>
+          <button class="secondary-button" id="cancelButton" type="button">取消</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="./supabase-config.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
